@@ -75,7 +75,7 @@ export default function Home() {
                     href={routes.external.auth.signup}
                     trackingEvent="GetStartedClick"
                     trackingParams={{ location: "hero_section" }}
-                    className="text-base sm:text-lg md:text-xl px-10 py-3 text-white"
+                    className="text-base sm:text-lg md:text-xl"
                   >
                     Get Started
                   </Button>

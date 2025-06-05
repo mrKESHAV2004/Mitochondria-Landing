@@ -30,6 +30,8 @@ const App = () => {
           <Route path='/learn' element={<LearnPage />} />
           <Route path='/games' element={<GamesPage />} />
           <Route path='/about' element={<ComingSoon />} />
+          <Route path='/games' element={<GamesPage />} />
+          <Route path='/community' element={<ComingSoon />} />
         </Routes>
       </Suspense>
     </div>
