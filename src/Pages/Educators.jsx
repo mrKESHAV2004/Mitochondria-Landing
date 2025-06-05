@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { Button } from "../components/Button"
 import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
-//import { submitEducatorForm } from "../services/api"
 import { trackPageView } from "../utils/analytics"
 
 export default function Educators() {
@@ -41,40 +40,68 @@ export default function Educators() {
     }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Create FormData object
-    const formData = new FormData()
-    formData.append("name", formState.name)
-    formData.append("org", formState.org)
-    formData.append("email", formState.email)
-    formData.append("phone", formState.phone)
+    // Prepare form data
+    const formData = {
+      name: formState.name.trim(),
+      org: formState.org.trim(),
+      email: formState.email.trim(),
+      phone: formState.phone.trim(),
+    }
 
-    try {
-      // Use the server action
-      const result = await submitEducatorForm(formData)
-      setFormResult(result)
-
-      if (result.success) {
-        // Reset form if successful
-        setFormState({
-          name: "",
-          org: "",
-          email: "",
-          phone: "",
-        })
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error)
+    // Basic validation
+    if (!formData.name || !formData.org || !formData.email || !formData.phone) {
       setFormResult({
         success: false,
-        message: "An unexpected error occurred. Please try again.",
-      })
-    } finally {
-      setIsSubmitting(false)
+        message: 'Please fill in all required fields.'
+      });
+      setIsSubmitting(false);
+      return;
     }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setFormResult({
+        success: false,
+        message: 'Please enter a valid email address.'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Create mailto link with form data
+    const subject = `New Educator Contact: ${formData.name}`;
+    const body = `
+Name: ${formData.name}
+Organization: ${formData.org}
+Email: ${formData.email}
+Phone: ${formData.phone}
+    `.trim();
+
+    const mailtoLink = `mailto:shrimalikeshav4@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open default email client
+    window.location.href = mailtoLink;
+
+    // Reset form
+    setFormState({
+      name: "",
+      org: "",
+      email: "",
+      phone: "",
+    });
+
+    setFormResult({
+      success: true,
+      message: 'Thank you! Your email client should open with the form details.'
+    });
+
+    setIsSubmitting(false);
+    closeModal();
   }
 
   return (

@@ -12,7 +12,7 @@ export function Button({
   ...props
 }) {
   // Base styles
-  const baseStyles = "relative font-semibold transition-all duration-200 rounded-full"
+  const baseStyles = "relative font-semibold transition-all duration-200 rounded-full transform-gpu"
 
   // Size variations
   const sizeStyles = {
@@ -22,12 +22,12 @@ export function Button({
     xlarge: "px-7 py-3 text-base md:px-12 md:py-4 md:text-lg",
   }
 
-  // Enhanced 3D effect with deeper shadows
+  // Enhanced 3D effect with deeper shadows and better transitions
   const variantStyles = {
     yellow:
-      "bg-[#FFDE5A] text-black shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.15)] hover:shadow-[inset_0_-3px_0_0_rgba(0,0,0,0.25)] active:translate-y-1 active:shadow-none",
+      "bg-[#FFDE5A] text-black shadow-[0_4px_0_0_rgba(0,0,0,0.2),0_6px_0_0_rgba(0,0,0,0.1)] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.2),0_4px_0_0_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none",
     black:
-      "bg-black text-white shadow-[inset_0_-6px_0_0_#1a1a1a] hover:shadow-[inset_0_-3px_0_0_#333] active:translate-y-1 active:shadow-none",
+      "bg-black text-white shadow-[0_4px_0_0_#1a1a1a,0_6px_0_0_#000] hover:shadow-[0_2px_0_0_#1a1a1a,0_4px_0_0_#000] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none",
   }
 
   // Combine all styles

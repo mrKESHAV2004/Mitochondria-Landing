@@ -64,7 +64,7 @@ export default function Home() {
                   in 7 Mins/Day
                 </h1>
 
-                <p className="mt-8 md:mt-10 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-bold text-white">
+                <p className="mt-8 md:mt-10 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-bold text-gray-500">
                   Interactive lessons based on global skill frameworks!
                 </p>
 
