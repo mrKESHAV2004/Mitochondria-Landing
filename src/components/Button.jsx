@@ -25,7 +25,7 @@ export function Button({
   // Enhanced 3D effect with deeper shadows and better transitions
   const variantStyles = {
     yellow:
-      "bg-[#FFDE5A] text-black shadow-[0_6px_0_0_rgba(0,0,0,0.3),0_8px_0_0_rgba(0,0,0,0.2)] hover:shadow-[0_3px_0_0_rgba(0,0,0,0.3),0_5px_0_0_rgba(0,0,0,0.2)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none",
+      "bg-[#FFDE5A] text-black shadow-[0_4px_0_0_rgba(0,0,0,0.2),0_6px_0_0_rgba(0,0,0,0.1)] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.2),0_4px_0_0_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none",
     black:
       "bg-black text-white shadow-[0_4px_0_0_#1a1a1a,0_6px_0_0_#000] hover:shadow-[0_2px_0_0_#1a1a1a,0_4px_0_0_#000] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none",
   }

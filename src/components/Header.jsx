@@ -110,7 +110,12 @@ export function Header() {
 
       {/* Full Screen Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-50 md:hidden">
+        <div 
+          className="fixed inset-0 bg-white z-50 md:hidden"
+          style={{
+            animation: 'slideIn 0.3s ease-out forwards'
+          }}
+        >
           <div className="h-full flex flex-col">
             {/* Menu Header */}
             <div className="flex justify-between items-center p-4 border-b border-gray-100">
@@ -140,16 +145,20 @@ export function Header() {
             {/* Menu Content */}
             <nav className="flex-1 flex flex-col p-6">
               <div className="flex-1 flex flex-col justify-center space-y-8">
-                {navLinks.map((link) => (
+                {navLinks.map((link, index) => (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`text-2xl font-medium text-center transition-colors duration-200 ${
+                    className={`text-2xl font-medium text-center transition-all duration-300 transform hover:scale-105 ${
                       location.pathname === link.to
                         ? "text-gray-900"
                         : "text-gray-600 hover:text-gray-900"
                     }`}
                     onClick={toggleMenu}
+                    style={{
+                      animation: `fadeInUp 0.3s ease-out ${index * 0.1}s forwards`,
+                      opacity: 0
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -157,7 +166,13 @@ export function Header() {
               </div>
 
               {/* Bottom CTA */}
-              <div className="mt-auto pt-8 border-t border-gray-100">
+              <div 
+                className="mt-auto pt-8 border-t border-gray-100"
+                style={{
+                  animation: 'fadeInUp 0.3s ease-out 0.4s forwards',
+                  opacity: 0
+                }}
+              >
                 <Link
                   to={routes.external.auth.signup}
                   className="block w-full py-4 text-center text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all duration-300"
@@ -170,6 +185,29 @@ export function Header() {
           </div>
         </div>
       )}
+
+      {/* Animation Styles */}
+      <style jsx>{`
+        @keyframes slideIn {
+          from {
+            transform: translateX(100%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </header>
   )
 }

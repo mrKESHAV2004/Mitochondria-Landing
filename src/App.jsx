@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import ComingSoon from './Pages/ComingSoon.jsx';
 import Educators from './Pages/Educators.jsx';
 
@@ -11,17 +11,49 @@ const LearnPage = lazy(() => import('./Pages/LearnPage.jsx'));
 const GamesPage = lazy(() => import('./Pages/GamesPage.jsx'));
 const About = lazy(() => import('./Pages/About.jsx'));
 
-// Loading component
-const Loading = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-  </div>
-);
+// Page Loader Component
+function PageLoader() {
+  return (
+    <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 border-4 border-[#FFDE5A] rounded-full animate-spin border-t-transparent"></div>
+        <div className="absolute inset-2 border-4 border-black rounded-full animate-spin border-t-transparent" style={{ animationDirection: 'reverse' }}></div>
+      </div>
+    </div>
+  )
+}
+
+// Scroll Restoration Component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <PageLoader />;
+  }
+
   return (
-    <div className='flex max-w-screen h-screen overflow-x-hidden'>
-      <Suspense fallback={<Loading />}>
+    <>
+      <ScrollToTop />
+      <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/educators' element={<Educators/>}/>
@@ -34,7 +66,7 @@ const App = () => {
           <Route path='/community' element={<ComingSoon />} />
         </Routes>
       </Suspense>
-    </div>
+      </>
   );
 };
 
