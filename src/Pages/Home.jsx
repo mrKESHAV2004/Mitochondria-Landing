@@ -3,7 +3,7 @@ import { AnimatedSkillChips } from "../components/AnimatedSkillChips"
 import { Button } from "../components/Button"
 import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
-import TypewriterAnimation from "../components/TypeWriterAnimation"
+import { TypewriterAnimation } from "../components/TypeWriterAnimation"
 import routes from "../lib/routes"
 import { trackPageView } from "../utils/analytics"
 
